@@ -1,0 +1,14 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+
+@mixin landing-page-background() {
+  background-color: $layer-01;
+  position: relative;
+}
+
+.repo-page__r1 {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
+  max-width: 100%;
+  max-height: 100%;
+}
