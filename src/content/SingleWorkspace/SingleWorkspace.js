@@ -35,6 +35,7 @@ const SingleWorkspacePage = (props) => {
       props.axiosStore.instance.get(`${url}`)
         .then(response => {
           if (response.hasOwnProperty('data')) {
+            console.log("response.data.data -->", response.data.data)
             setData(response.data.data);
           }
         })
@@ -67,10 +68,13 @@ const SingleWorkspacePage = (props) => {
   // If we're here, we've got our data!
   return (
     <Grid className="landing-page" fullWidth>
+              
       <Column lg={16} md={8} sm={4} className="repo-page__r1">
+      <h1 className="landing-page__heading">{"List of reports for " + ws}</h1>
+        <hr />
         <SingleWorkspaceTable
           data={data}
-          tableTitle={"List of reports for " + ws}
+          wsname={props.match.params.wsname}
         />
       </Column>
     </Grid>

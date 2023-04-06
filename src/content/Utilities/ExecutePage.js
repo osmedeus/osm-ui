@@ -262,7 +262,7 @@ class ExecutePage extends Component {
     return (
 
       <Grid fullWidth>
-      <Column lg={8} md={4}  className="repo-page__r1">
+      <Column lg={8} md={4} sm={4} className="repo-page__r1">
                 <div className="bx--col-md-4 bx--col-lg-4">
                   <h1 className="landing-page__heading">New Scan</h1>
                   <hr />
@@ -312,7 +312,7 @@ class ExecutePage extends Component {
                 </div>
 
               </Column>
-                <Column  md={4}  className="repo-page__r1">
+                <Column  md={4} sm={4} className="repo-page__r1">
                 <div className="bx--col-md-4 bx--col-lg-8">
                   <h1 className="landing-page__heading">Upload</h1>
                   <hr />
@@ -340,7 +340,7 @@ class ExecutePage extends Component {
 
       </Column>
 
-      <Column lg={16} md={8}>
+      <Column lg={16} md={8} sm={4}>
         <hr></hr>
       <h1 className="landing-page__heading">Final Command</h1>
           {commandBox}

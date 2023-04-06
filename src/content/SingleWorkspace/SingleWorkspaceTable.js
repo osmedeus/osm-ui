@@ -7,14 +7,22 @@ import {
   TableRow,
   TableHeader,
   TableBody,
+  Button,
   TableCell,
+  TableToolbar,
+  TableToolbarContent,
+  TableToolbarSearch,
 } from '@carbon/react';
 import _ from 'lodash';
+import { Add, Archive } from '@carbon/react/icons';
 import ReportButton from './ReportButton';
 
 
-const SingleWorkspaceTable = ({ data, tableTitle }) => {
+
+
+const SingleWorkspaceTable = ({ data, wsname }) => {
   const base_url = window.origin;
+  // const wsname = wsname;
   let rawReports = data.reports;
   let rowData = [];
   const headerData = [
@@ -28,11 +36,18 @@ const SingleWorkspaceTable = ({ data, tableTitle }) => {
       },
     ];
 
+
+  console.log("rawReports -->", rawReports)
   _.map(rawReports, function(value, key) {
-    let item = {
+    // console.log("value -->", value)
+
+    const item = {
+      id: key,
       module: key,
       detail: <ReportButton reports={value} base_url={base_url} />,
     };
+
+    // console.log(item)
     rowData.push(item)
   });
 
@@ -43,10 +58,43 @@ const SingleWorkspaceTable = ({ data, tableTitle }) => {
     });
   }
 
+  // let wsname = 'wsname'
+
   return (
-    <DataTable rows={rowData} headers={headerData} isSortable={true}>
-      {({ rows, headers, getHeaderProps, getTableProps }) => (
-        <TableContainer title={tableTitle}>
+    <DataTable rows={rowData} headers={headerData} isSortable={false}>
+      {({ rows, headers, getHeaderProps, getTableProps, getBatchActionProps, onInputChange }) => (
+        <TableContainer>
+        <TableToolbar>
+        <TableToolbarContent>
+          <TableToolbarSearch
+            expanded={true}
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onChange={onInputChange}
+          />
+
+          
+          <Button
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onClick={() => window.open(`${window.origin}/ui/#/execute`, '_blank')}
+            kind="primary"
+            renderIcon={Add}
+          >
+            New Scan
+          </Button>
+          
+          <Button
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onClick={() => window.open(`${window.origin}${wsname}`, '_blank')}
+
+            renderIcon={Archive}
+            kind="secondary"
+          >
+            Raw View
+          </Button>
+        </TableToolbarContent>
+      </TableToolbar>
+
+
           <Table {...getTableProps()} useZebraStyles={false} size='lg'>
             <TableHead>
               <TableRow>

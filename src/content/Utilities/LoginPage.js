@@ -26,13 +26,51 @@ class LoginPage extends Component {
   };
 
   componentDidMount() {
+    // check if we're disbale login or not
+
     const jwt = window.localStorage.getItem('jwt');
     if (jwt) {
       this.props.axiosStore.setJWT(jwt);
       this.props.sessStore.setisLogged();
       console.log(this.props.sessStore.isLogged);
       this.setState({ isLogged: this.props.sessStore.isLogged });
+    } else {
+      if (this.healthCheck() === true) {
+        console.log("isLogged --> ", this.props.sessStore.isLogged);
+        this.props.axiosStore.setJWT('Authentication Disabled');
+        this.props.sessStore.setisLogged();
+        this.setState({ isLogged: this.props.sessStore.isLogged });
+      }
     }
+  }
+
+  healthCheck() {
+    const url = this.props.axiosStore.url + '/api/osmp/health';
+    axios.get(url)
+    .then(response => {
+      if (response.data.status == 200) {
+        this.props.sessStore.setisLogged();
+        console.log("already logging in")
+        this.setState({ isLogged: this.props.sessStore.isLogged });
+        
+        this.props.axiosStore.setJWT('Authentication Disabled');
+        this.props.sessStore.setisLogged();
+        this.setState({ isLogged: this.props.sessStore.isLogged });
+        window.location = '/ui/#/';
+
+        this.setState({ error: false });
+        return true;
+      } else {
+        this.setState({ error: true });
+        window.location = '/ui/#/login';
+      }
+    })
+    .catch(function(error) {
+      console.log(error);
+      // window.location = '/ui/#/login';
+    });
+
+    return false;
   }
 
   handleLogin(username, password) {

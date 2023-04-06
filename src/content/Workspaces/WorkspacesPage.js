@@ -37,6 +37,7 @@ const WorkspacePage = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [rows, setRows] = useState([]);
+  const [metadata, setMetaData] = useState([]);
 
 
 
@@ -52,6 +53,18 @@ const WorkspacePage = (props) => {
           }
         })
       setLoading(false);
+
+      url = `${props.axiosStore.url}/api/osmp/raw`;
+      // console.log(`sending GET request to ${url}`);
+
+      props.axiosStore.instance.get(`${url}`)
+        .then(response => {
+          if (response.hasOwnProperty('data')) {
+            setMetaData(response.data.data);
+          }
+        })
+      setLoading(false);
+
     }
     getData();
 
@@ -81,9 +94,16 @@ const WorkspacePage = (props) => {
   // If we're here, we've got our data!
   return (
     <Grid className="landing-page" fullWidth>
+
+
+
       <Column lg={16} md={8} sm={4} className="repo-page__r1">
+        <h1 className="landing-page__heading">Index of all workspaces</h1>
+        <hr />
+
         <WorkspacesTable
           rows={rows}
+          metadata={metadata}
         />
         <Pagination
           totalItems={rows.length}

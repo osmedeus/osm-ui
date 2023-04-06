@@ -28,14 +28,14 @@ class LandingPage extends Component {
 
 
   return (
-    <Grid className="landing-page" fullWidth>
+    <Grid className="landing-page__r2" >
       
-      <Column lg={8} md={8} sm={8} className="landing-page__r2">
+      {/* <Column lg={8} md={8} sm={8} className="landing-page__r2"> */}
 
-              <Grid className="tabs-group-content">
+              {/* <Grid className="tabs-group-content"> */}
                 <Column
-                  lg={3}
-                  md={3}
+                  lg={6}
+                  md={6}
                   sm={4}
                   className="landing-page__tab-content">
                 <h2 className="landing-page__subheading">What is Osmedeus?</h2>
@@ -61,18 +61,19 @@ class LandingPage extends Component {
 
 
                 </Column>
-                <Column lg={5} md={5} sm={4}>
+
+
+                <Column lg={10} md={8} sm={4}>
                   <img
                     className="landing-page__illo"
                     src={`${process.env.PUBLIC_URL}/static/osmedeus-architecture.png`}
                     alt="Main Image"
                   />
                 </Column>
-              </Grid>
+              {/* </Grid> */}
 
 
-      </Column>
-
+      {/* </Column> */}
     </Grid>
   );
   }}

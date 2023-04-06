@@ -7,6 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 class axiosStore {
   url = window.location.origin;
+  // url = 'http://127.0.0.1:8000'; // for testing
   token = '';
   // master_password = '';
 
@@ -26,6 +27,8 @@ class axiosStore {
       const url = window.location.origin;
       this.instance.baseURL = url;
       console.log("this.instance.baseURL", this.instance.baseURL)
+      // this.instance.baseURL = 'http://127.0.0.1:8000';  // for testing
+
       // get the token
       const token = 'Osmedeus ' + window.localStorage.getItem('jwt');
       this.token = 'Osmedeus ' + window.localStorage.getItem('jwt');

@@ -16,6 +16,9 @@ class RedirectPage extends Component {
 
   componentDidMount() {
     console.log(this.props.axiosStore.url);
+    setTimeout(function(){
+      window.location.reload();
+   }, 3000);
   }
 
   openURL = () => this.setState({ isOpenURL: true });
@@ -24,7 +27,6 @@ class RedirectPage extends Component {
   render() {
     
     return (
-
       <p align="center">
         <Loading withOverlay={false} className="some-class" />
         <h1>Authenticate processing</h1>

@@ -11,13 +11,16 @@ import {
   Button,
   TableCell,
   Tag,
+  TableToolbar,
+  TableToolbarContent,
+  TableToolbarSearch,
 } from '@carbon/react';
 import _ from 'lodash';
-import { Launch, Cloud } from '@carbon/react/icons';
+import { Launch, Cloud, Archive, Add } from '@carbon/react/icons';
 
 
 
-const WorkspacesTable = ({ rows }) => {
+const WorkspacesTable = ({ rows, metadata }) => {
   let rowData = [];
   const headerData = [
     {
@@ -86,7 +89,7 @@ const WorkspacesTable = ({ rows }) => {
       detail: (
         <div>
           <Button
-            href={`/#/workspace/${value.name}/`}
+            href={`/ui/#/workspace/${value.name}/`}
             renderIcon={Launch}
             size="sm"
             target="_blank"
@@ -143,11 +146,41 @@ const WorkspacesTable = ({ rows }) => {
     rowData.push(item)
   });
 
-
+// title="Index of all workspaces"
   return (
     <DataTable rows={rowData} headers={headerData} isSortable={true}>
-      {({ rows, headers, getHeaderProps, getTableProps }) => (
-        <TableContainer title="Index of all workspaces">
+      {({ rows, headers, getHeaderProps, getTableProps, getBatchActionProps, onInputChange }) => (
+        <TableContainer>
+
+        <TableToolbar>
+        <TableToolbarContent>
+          <TableToolbarSearch
+            expanded={true}
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onChange={onInputChange}
+          />
+
+          
+          <Button
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onClick={() => window.open(`${window.origin}/ui/#/execute`, '_blank')}
+            kind="primary"
+            renderIcon={Add}
+          >
+            New Scan
+          </Button>
+          
+          <Button
+            tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
+            onClick={() => window.open(`${window.origin}${metadata.workspaces}`, '_blank')}
+            renderIcon={Archive}
+            kind="secondary"
+          >
+            Raw View
+          </Button>
+        </TableToolbarContent>
+      </TableToolbar>
+
           <Table {...getTableProps()} useZebraStyles={false} size='lg'>
             <TableHead>
               <TableRow>

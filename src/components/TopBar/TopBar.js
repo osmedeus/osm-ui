@@ -45,7 +45,7 @@ class TopBar extends Component {
     return (
       <HeaderContainer
         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <Header aria-label="Carbon Tutorial">
+          <Header aria-label="Osmedeus UI">
             <SkipToContent />
             <HeaderMenuButton
               aria-label="Open menu"
