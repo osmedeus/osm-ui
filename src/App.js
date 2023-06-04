@@ -11,6 +11,7 @@ import WorkspacesPage from './content/Workspaces/WorkspacesPage';
 import SingleWorkspace from './content/SingleWorkspace/SingleWorkspace';
 import ProcessPage from './content/Utilities/ProcessPage';
 import ExecutePage from './content/Utilities/ExecutePage';
+import DeletePage from './content/Utilities/DeletePage';
 import LoginPage from './content/Utilities/LoginPage';
 import PrivateRoute from './content/Utilities/PrivateRoute';
 
@@ -28,6 +29,7 @@ class App extends Component {
             <PrivateRoute exact path="/workspace/:wsname" component={SingleWorkspace} />
             <PrivateRoute exact path="/ps" component={ProcessPage} />
             <PrivateRoute exact path="/execute" component={ExecutePage} />
+            <PrivateRoute exact path="/delete" component={DeletePage} />
             <PrivateRoute exact path="/login" component={LoginPage} />
           </Switch>
         </Content>
