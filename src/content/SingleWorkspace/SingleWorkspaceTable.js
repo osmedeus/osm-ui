@@ -17,9 +17,6 @@ import _ from 'lodash';
 import { Add, Archive } from '@carbon/react/icons';
 import ReportButton from './ReportButton';
 
-
-
-
 const SingleWorkspaceTable = ({ data, wsname }) => {
   const base_url = window.origin;
   // const wsname = wsname;
