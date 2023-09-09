@@ -14,9 +14,10 @@ import {
   TableToolbar,
   TableToolbarContent,
   TableToolbarSearch,
+  ButtonSet,
 } from '@carbon/react';
 import _ from 'lodash';
-import { Launch, Cloud, Archive, Add } from '@carbon/react/icons';
+import { Launch, Cloud, Archive, Add, Report } from '@carbon/react/icons';
 
 
 
@@ -28,8 +29,8 @@ const WorkspacesTable = ({ rows, metadata }) => {
       header: 'Target',
     },
     {
-      key: 'detail',
-      header: 'Detail',
+      key: 'report',
+      header: 'Report',
     },
 
     {
@@ -86,17 +87,31 @@ const WorkspacesTable = ({ rows, metadata }) => {
     let item = {
       id: value.name,
       name: value.name,
-      detail: (
-        <div>
-          <Button
+      report: (
+        <ButtonSet>
+        <Button
             href={`/ui/#/workspace/${value.name}/`}
             renderIcon={Launch}
-            size="sm"
+            hasIconOnly
+            tooltipPosition='left'
+            iconDescription='List of Reports'
             target="_blank"
             kind="primary">
             {`Reports (${numberOfReports})`}
           </Button>
-        </div>
+
+          <Button
+            href={`${window.origin}${value.markdown_report}`}
+            renderIcon={Report}
+            tooltipPosition='right'
+            iconDescription='Markdown Report'
+            hasIconOnly
+            target="_blank"
+            kind="secondary">
+          </Button>
+
+
+</ButtonSet>
       ),
       status: value.status,
       routine: value.task_name,

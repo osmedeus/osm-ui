@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './app.scss';
 import { Content, Theme } from '@carbon/react';
 import TopBar from './components/TopBar/TopBar';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 // pages
-import LandingPage from './content/LandingPage/LandingPage';
+import HomePage from './content/LandingPage/HomePage';
 import WorkspacesPage from './content/Workspaces/WorkspacesPage';
 import SingleWorkspace from './content/SingleWorkspace/SingleWorkspace';
 import ProcessPage from './content/Utilities/ProcessPage';
@@ -24,7 +24,7 @@ class App extends Component {
         </Theme>
         <Content>
           <Switch>
-            <PrivateRoute exact path="/" component={LandingPage} />
+            <PrivateRoute exact path="/" component={HomePage} />
             <PrivateRoute exact path="/workspaces" component={WorkspacesPage} />
             <PrivateRoute exact path="/workspace/:wsname" component={SingleWorkspace} />
             <PrivateRoute exact path="/ps" component={ProcessPage} />
